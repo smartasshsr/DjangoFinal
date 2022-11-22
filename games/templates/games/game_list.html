@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/games/game_list.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>게임 목록</h1>
+
+  <ol>
+    <li><p><a href="{% url 'games:rsp_select'%}">가위바위보 게임</a></p></li>
+    <li><p><a href="{% url 'games:weapon_list'%}">무기 목록</a></p></li>
+    <li><p><a href="{% url 'games:adventure_home'%}">장고캣의 모험(가제)</a></p></li>
+  </ol>
+{% endblock %}

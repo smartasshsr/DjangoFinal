@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block rsp_head %}
+  <link rel="stylesheet" href="{% static 'css/games/rsp_result.css' %}">
+{% endblock %}
+
+{% block rsp_body %}
+  <h1>가위바위보 게임 결과</h1>
+  
+  <p>나는 <b>{{pick}}</b>를 선택했습니다.</p>
+  <p>컴퓨터는 <b>{{com}}</b>를 선택했습니다.</p>
+
+  <h2 class="rsp__result">
+    {% if result == "승리" %}
+      내가 이겼습니다.
+    {% elif result == "무승부" %}
+      비겼습니다.
+    {% else %}
+      컴퓨터가 이겼습니다.
+    {% endif %}
+  </h2>
+  
+{% endblock %}

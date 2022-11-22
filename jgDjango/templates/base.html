@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jgDjango</title>
+  <link rel="icon" href="{% static 'images/favicon-96x96.png' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar__page">
+      <span>
+        <a href="{% url 'postings:index' %}">
+          <img class="navbar__logo" src="{% static 'images/jgcat.jpg' %}" alt="jgcat">
+        </a>
+      </span>
+      <span>
+        <a href="{% url 'postings:posting_list' %}">글목록</a>
+      </span>
+      <span>
+        <a href="{% url 'postings:posting_create' %}">글쓰기</a>
+      </span>
+      <span>
+        <a href="{% url 'games:game_list' %}">게임목록</a>
+      </span>
+    </div>
+    <div class="navbar__account">
+      {% if user.is_authenticated %}
+      <span>
+        {{user.username}}님 안녕하세요.
+      </span>
+      <span>
+        <a href="{% url 'accounts:logout' %}" onclick="return userLogout()">로그아웃</a>
+      </span>
+      {% else %}
+        <span>
+          <a href="{% url 'accounts:login' %}">로그인</a>
+        </span>
+        <span>
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container">
+    {% block body %}
+    {% endblock %}
+  </div>
+
+  <script>
+    function userLogout() {
+      const result = confirm("로그아웃 하시겠습니까?");
+      return result;
+    }
+  </script>
+</body>
+</html>

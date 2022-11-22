@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5px 8vw;
+  background-color: MediumTurquoise;
+}
+
+.navbar span {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.navbar a {
+  padding: 3px 6px;
+  color: black;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  padding: 3px 6px;
+  border-radius: 10px;
+  background-color: PaleTurquoise;
+}
+
+.navbar__logo {
+  display:flex;
+  width: 60px;
+  margin: 5px;
+}
+
+.navbar__page {
+  display: flex;
+}
+
+.navbar__account {
+  display: flex;
+}

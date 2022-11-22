@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/games/rsp_select.css' %}">
+  {% block rsp_head %}
+  {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+  {% block rsp_body %}
+    <h1>가위바위보 게임</h1>
+
+  {% endblock %}
+  <div class="rsp__count">
+    <p>승리 횟수 : {{win}}회</p>
+    <p>무승부 횟수 : {{draw}}회</p>
+    <p>패배 횟수 : {{lose}}회</p>
+
+    <a href="{% url 'games:rsp_reset' %}">초기화</a>
+  </div>
+
+  <h3>선택해주세요~</h3>
+  <div class="rsp__button">
+    <a href="{% url 'games:rsp_result' '가위' %}">가위</a>
+    <a href="{% url 'games:rsp_result' '바위' %}">바위</a>
+    <a href="{% url 'games:rsp_result' '보' %}">보</a>
+  </div>
+  
+{% endblock %}

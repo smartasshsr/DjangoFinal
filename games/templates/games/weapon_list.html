@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/games/weapon_list.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>전체 무기 목록</h1>
+
+  <ul>
+    {% for weapon in weapons %}
+      <li><p>{{weapon.name}} (공격력: {{weapon.power}})</p></li>
+    {% empty %}
+      <li><p>무기가 없습니다.</p></li>
+    {% endfor %}
+    <a class="button" href="{% url 'games:weapon_create' %}">무기 생성하기</a>
+  </ul>
+{% endblock %}

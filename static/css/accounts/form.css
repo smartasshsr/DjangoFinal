@@ -1,0 +1,49 @@
+.helptext {
+  display: block;
+  margin-top: 5px;
+  color: red;
+  font-size: 0.8rem;
+}
+
+.errorlist {
+  display: block;
+  visibility: visible;
+  background-color: pink;
+}
+
+ul {
+  display: none;
+  visibility: hidden;
+  padding: 10px 5px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+li {
+  margin-top: 2px;
+  margin-left: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: Khaki;
+  color: SaddleBrown;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+input{
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-size: 1rem;
+}
+
+input[type=submit] {
+  cursor: pointer;
+}
+
+a.button {
+  margin: 0 5px;
+}

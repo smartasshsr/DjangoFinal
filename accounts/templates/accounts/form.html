@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/accounts/form.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>{{type}}</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="button" type="submit" value="{{type}}">
+    {% if type == '로그인' %}
+      <a class="button" href="{% url 'accounts:signup' %}">회원가입</a>
+    {% endif %}
+  </form>
+{% endblock %}

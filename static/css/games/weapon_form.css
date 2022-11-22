@@ -1,0 +1,29 @@
+.weapon {
+  padding: 10px;
+  margin: 10px;
+}
+
+input {
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-size: 1rem;
+}
+
+input[type=text] {
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+input[type=number] {
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+input[type=submit] {
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: Khaki;
+  color: SaddleBrown;
+  text-decoration: none;
+  cursor: pointer;
+}

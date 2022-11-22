@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/games/game_form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/games/game_adventure.css' %}">
+  {% endblock %}
+
+{% block body %}
+  <h1>{{user.character.nickname}}님의 모험을 시작합니다.</h1>
+
+  <p>모험에 필요한 무기는 랜덤으로 선택됩니다.</p>
+  <p><<{{random_weapon.name}}>> 무기가 선택되었습니다.</p>
+  <p>이 무기를 받으시겠습니까?</p>
+
+  <a href="">다시 선택하기</a>
+  <form action="{% url 'games:weapon_get' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="random-weapon" value="{{random_weapon.id}}">무기 받기</button>
+  </form>
+{% endblock %}

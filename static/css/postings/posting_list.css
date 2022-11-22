@@ -1,0 +1,94 @@
+.button {
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: Khaki;
+  color: SaddleBrown;
+  text-decoration: none;
+}
+
+.posting__function--top {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: right;
+  padding-bottom: 20px;
+}
+
+.posting__list {
+  width: 100%;
+  margin: auto;
+  table-layout: fixed;
+}
+
+.posting__list th {
+  padding: 5px;
+  border-bottom: 2px solid;
+}
+
+.posting__list td {
+  padding: 5px 10px;
+  border-bottom: 1px solid;
+}
+
+.posting__list td a {
+  color: black;
+  text-decoration: none;
+}
+
+.posting__list td a:hover {
+  text-decoration: underline;
+}
+
+.posting__list .index {
+  width: 2rem;
+  text-align: center;
+}
+
+.posting__list .title {
+  overflow: hidden;
+  width: auto;
+  padding: 5px 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.posting__list .author {
+  width: 4rem;
+  text-align: center;
+}
+
+.posting__list .date {
+  width: 6rem;
+  text-align: center;
+}
+
+.paginator {
+  text-align: center;
+}
+
+.paginator a {
+  display: inline-block;
+  padding: 3px 6px;
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: Tan;
+  color: SaddleBrown;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+a.paginator__disabled {
+  background-color: LightGray;
+  color: DimGray;
+}
+
+a.page_number{
+  background-color: Khaki;
+  color: SaddleBrown;
+}
+
+a.page_number__active {
+  background-color: SaddleBrown;
+  color: Khaki;
+}

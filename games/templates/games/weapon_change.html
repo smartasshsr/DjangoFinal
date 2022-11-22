@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/games/game_form.css' %}">
+  <link rel="stylesheet" href="{% static 'css/games/game_adventure.css' %}">
+  {% endblock %}
+
+{% block body %}
+  <h1>무기 뽑기 결과</h1>
+
+  <hr>
+  <p>{{character.nickname}}님의 보유 현황</p>
+  <p>
+    <ul>
+      <li><p>보유 무기 : <span id="weapon__name">{{weapon_name}}</span>&nbsp;(공격력 : +{{weapon_power}})</p></li>
+      <li><p>보유 코인 : {{character.coin}}코인</p></li>
+    </ul>
+  </p>
+  <hr>
+
+  <p>당신이 뽑은 무기는 <<{{random_weapon.name}}>>입니다.</p>
+  <p>교체하시겠습니까?</p>
+
+  <p>
+    <form action="{% url 'games:weapon_change' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" name="random-weapon" value="{{random_weapon.id}}" onclick="alertSuccess()">교체하기</button>
+      <span class="weapon-info">(※ 무기 레벨이 초기화됩니다.)</span>
+    </form>
+  </p>
+
+  <p>
+    <form action="{% url 'games:weapon_pick' %}" method="post" onsubmit="return checkPick()">
+      {% csrf_token %}
+      {% if character.coin < 500 %}
+        <button type="submit" class="disabled" disabled>무기 뽑기(500코인)</button>
+        <span class="weapon-info">(※ 코인이 부족합니다.)</span>
+        {% else %}
+        <button type="submit">무기 뽑기(500코인)</button>
+        <span class="weapon-info">(※ 무기를 교체하면 무기 레벨이 초기화됩니다.)</span>
+      {% endif %}
+    </form>
+  </p>
+
+  <p>
+    <a href="{% url 'games:adventure_home' %}">돌아가기</a>
+  </p>
+
+  <script>
+    function alertSuccess() {
+      alert('교체되었습니다.');
+    }
+
+    function checkPick() {
+      const result = confirm("정말 뽑으시겠습니까?\n500코인이 소모됩니다.");
+      return result;
+    }
+  </script>
+{% endblock %}

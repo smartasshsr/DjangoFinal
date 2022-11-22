@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/games/game_form.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>캐릭터 생성</h1>
+  
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="weapon">
+      {{character_form}}
+      <input type="submit" value="생성">
+    </div>
+  </form>
+{% endblock %}
