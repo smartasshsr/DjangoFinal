@@ -12,12 +12,15 @@
     <p>당신은 '{{random_enemy.name}}'을(를) 만났습니다.</p>
     
     <p>
+      <!-- 공격하기 버튼을 누르면 game 앱의 adventure_attack_result url로 이동 -->
       <form action="{% url 'games:adventure_attack_result' %}" method="post">
         {% csrf_token %}
+        <!-- value 값으로 랜덤 적의 id를 전달 -->
         <button type="submit" name="random-enemy" value="{{random_enemy.id}}">공격하기</button>
       </form>
     </p>
   
+    <!-- [미션] 자유롭게 코드 작성 -->
     <p>
       <a href="{% url 'games:adventure_home' %}">도망치기</a>
     </p>

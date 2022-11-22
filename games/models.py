@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 
 # Create your models here.
+# [미션] 자유롭게 코드 작성
+# [미션] 필요한 필드가 있다면 추가하기
 class Weapon(models.Model):
     name = models.CharField(max_length=20)
     power = models.IntegerField()
