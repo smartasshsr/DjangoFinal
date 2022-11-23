@@ -12,29 +12,32 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 # [코드 작성] os 모듈(Operating System) 불러오기
-
+import os
 # [코드 작성] 가상환경 관련 설정
-
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # [코드 작성] .env 파일의 내용을 가져올 수 있도록 경로 지정
-
+env = environ.Env(DEBUG=(bool, True))
+environ.Env.read_env(
+    env_file=os.SECRET_KEY = env('SECRET_KEY')path.join(BASE_DIR, '.env')
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # [코드 수정] SECRET_KEY 분리
-SECRET_KEY = 'django-insecure-+9@85!p(&i@9fx6%+=zcevg3kz6av#0%j&66bweyp#s3ez!6+w'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # [코드 수정] 개발 단계에서는 DEBUG를 True, 배포 단계에서는 DEBUG를 False로 설정
-DEBUG = True
+DEBUG = False
 
 # [코드 추가] ALLOWED_HOSTS에 '*'를 추가
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -131,7 +134,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 # [코드 작성] 배포 시 프로젝트에서 사용하는 모든 정적 파일을 모아두는 경로를 STATIC_ROOT로 지정
 # [코드 작성] os.path.join(BASE_DIR, 'staticfiles')을 사용하여 지정
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -141,4 +144,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'auth.User'
 
 # [코드 작성] django_heroku 설정
-
+import django_heroku
+django_heroku.settings(locals())

@@ -20,9 +20,9 @@
         <th class="author">작성자</th>
         <th class="date">날짜</th>
       </tr>
-      {% for posting in postings reversed %}
+      {% for posting in page_postings %}
         <tr>
-          <td class="index">{{forloop.revcounter}}</td>
+          <td class="index">{{page_postings_start_index|add:-10|add:forloop.revcounter}}</td>
           <td class="title"><a href="{% url 'postings:posting_detail' posting.id %}">{{posting.title}}</a></td>
           <td class="author">{{posting.author.username}}</td>
           <td class="date">{{posting.date|date:'Y-m-d'}}</td>
@@ -36,5 +36,41 @@
         </tr>
       {% endfor %}
     </table>
+
+    {% if page_postings %}
+      <p class="paginator">
+        {% if page_postings.number == 1 %}
+          <a class="paginator__disabled" disabled>처음</a>
+        {% else %}
+          <a href="?page=1">처음</a>
+        {% endif %}
+
+        {% if move_previous %}
+          <a href="?page={{previous_page}}">이전</a>
+        {% else %}
+          <a class="paginator__disabled" disabled>이전</a>
+        {% endif %}
+
+        {% for page_number in page_range %}
+          {% if page_number == page_postings.number %}
+            <a class="page_number__active" href="?page={{page_number}}">{{page_number}}</a>
+          {% else %}
+            <a class="page_number" href="?page={{page_number}}">{{page_number}}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if move_next %}
+          <a href="?page={{next_page}}">다음</a>
+        {% else %}
+          <a class="paginator__disabled" disabled>다음</a>
+        {% endif %}
+
+        {% if page_postings.number == page_postings.paginator.num_pages %}
+          <a class="paginator__disabled" disabled>끝</a>
+        {% else %}
+          <a href="?page={{page_postings.paginator.num_pages}}">끝</a>
+        {% endif %}
+      </p>
+    {% endif %}
   </div>
 {% endblock %}
