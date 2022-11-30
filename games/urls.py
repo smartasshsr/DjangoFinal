@@ -17,5 +17,6 @@ urlpatterns = [
     path('weapon/workroom/', views.weapon_workroom, name='weapon_workroom'),
     # [미션] 자유롭게 코드 작성
     # [미션] 필요한 url 경로 작성
-    
+    path('weapon/pick/', views.weapon_pick, name='weapon_pick'),
+    path('weapon/change/', views.weapon_change, name='weapon_change'),
 ]
