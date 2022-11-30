@@ -54,13 +54,24 @@
 }
 
 .posting__list .author {
+  overflow: hidden;
   width: 4rem;
   text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .posting__list .date {
   width: 6rem;
   text-align: center;
+}
+
+.title-content {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 90%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .paginator {

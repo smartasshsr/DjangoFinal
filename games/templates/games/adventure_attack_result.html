@@ -11,6 +11,16 @@
     <h1>전투 결과</h1>
 
     <!-- [미션] 자유롭게 코드 작성 -->
-    
+    <p>당신은 '{{enemy.name}}'와(과)의 전투에서 {{result}}하였습니다.</p>
+  
+    {% if result == "승리" %}
+      <p>{{reward_coin}}코인을 획득하셨습니다.</p>
+    {% endif %}
+    <p>
+      <a href="{% url 'games:adventure_attack' %}">모험 떠나기</a>
+    </p>
+    <p>
+      <a href="{% url 'games:adventure_home' %}">돌아가기</a>
+    </p>
   </div>
 {% endblock %}

@@ -12,7 +12,19 @@
     <table class="posting__detail">
       <tr>
         <td class="posting__detail__title">{{posting.title}}</td>
-        <td class="posting__detail__function">
+      </tr>
+      <tr>
+        <td class="posting__detail__date">작성자: {{posting.author.username}}&nbsp;&nbsp;&nbsp;<span class="division">|</span>&nbsp;&nbsp;&nbsp;작성일 : {{posting.date|date:'Y-m-d A f'}}</td>
+      </tr>
+      <tr>
+        <td class="posting__detail__content">
+          <div class="content">
+            <span class="content__space">{{posting.content|linebreaksbr}}</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="posting__detail__function transparent">
           <div>
             {% if posting.author.username == user.username %}
               <a class="button" href="{% url 'postings:posting_update' posting.id %}">수정</a>
@@ -21,22 +33,6 @@
                 <input class="button" type="submit" value="삭제">
               </form>
             {% endif %}
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="posting__detail__date" colspan="2">작성자: {{posting.author.username}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;작성일 : {{posting.date|date:'Y-m-d A f'}}</td>
-      </tr>
-      <tr>
-        <td class="posting__detail__content" colspan="2">
-          <div class="content">
-            <span class="content__space">{{posting.content|linebreaksbr}}</span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="posting__detail__function transparent" colspan="2">
-          <div>
             <a class="button" href="{% url 'postings:posting_list' %}">글 목록</a>
           </div>
         </td>
@@ -45,11 +41,11 @@
 
     <table class="posting__comment">
       <tr>
-        <th colspan="2">댓글 목록</th>
+        <th>댓글 목록</th>
       </tr>
       {% if user.is_authenticated %}
         <tr>
-          <td class="posting__comment__create" colspan="2">
+          <td class="posting__comment__create">
             <form action="" method="post">
               {% csrf_token %}
               <div>
@@ -63,15 +59,17 @@
       {% for comment in comments %}
         <tr>
           <td class="posting__comment__content">
-            <span class="content__space">{{comment.content|linebreaksbr}}</span>
-          </td>
-          <td class="posting__comment__delete" rowspan="2">
-            {% if comment.author.username == user.username %}
-              <form action="{% url 'postings:comment_delete' posting_id=posting.id comment_id=comment.id %}" method="post" onsubmit="return contentDelete()">
-                {% csrf_token %}
-                <input type="submit" value="x">
-              </form>
-            {% endif %}
+            <div>
+              <span class="content__space">{{comment.content|linebreaksbr}}</span>
+              <div class="posting__comment__delete">
+                {% if comment.author.username == user.username %}
+                  <form action="{% url 'postings:comment_delete' posting_id=posting.id comment_id=comment.id %}" method="post" onsubmit="return contentDelete()">
+                    {% csrf_token %}
+                    <input type="submit" value="x">
+                  </form>
+                {% endif %}
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -80,13 +78,13 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td>
             <hr class="posting__comment__line">
           </td>
         </tr>
       {% empty %}
         <tr>
-          <td class="posting__comment__content" colspan="2">
+          <td class="posting__comment__content">
             댓글이 아직 작성되지 않았습니다.
           </td>
         </tr>
@@ -94,7 +92,7 @@
           <td class="posting__comment__date"></td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td>
             <hr class="posting__comment__line">
           </td>
         </tr>

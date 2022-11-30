@@ -13,7 +13,7 @@
   display: flex;
   justify-content: left;
   min-height: 20vh;
-  margin: 10px 5px;
+  padding: 10px 5px;
 }
 
 textarea {
@@ -49,6 +49,7 @@ input[type=submit] {
 
 .posting__detail__title {
   font-size: 1.5rem;
+  word-wrap: break-word;
 }
 
 .posting__detail__function {
@@ -68,10 +69,12 @@ input[type=submit] {
   margin-top: 30px;
   background-color: PaleGoldenrod;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .posting__comment th {
   padding: 20px 20px 10px;
+  font-size: 1.2rem;
   text-align: left;
 }
 
@@ -97,10 +100,26 @@ input[type=submit] {
 
 .posting__comment__content {
   padding: 15px 30px 0px;
+  text-align: left;
+}
+
+.posting__comment__content > div {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+
+.content__space {
+  display: inline-block;
+  width: 90%;
+  word-wrap: break-word;
 }
 
 .posting__comment__delete {
-  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
   text-align: center;
 }
 
@@ -112,7 +131,7 @@ input[type=submit] {
 }
 
 .posting__comment__date {
-  padding: 10px 30px 0px;
+  padding: 5px 30px 0px;
   color: Peru;
   font-size: 0.8rem;
 }
@@ -120,4 +139,12 @@ input[type=submit] {
 .posting__comment__line {
   margin: 10px 20px 5px;
   border: 0.5px solid SaddleBrown;
+}
+
+.division {
+  color: DarkGray;
+}
+
+.errorlist {
+  display: none;
 }

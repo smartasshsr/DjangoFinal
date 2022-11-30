@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # [코드 작성] .env 파일의 내용을 가져올 수 있도록 경로 지정
 env = environ.Env(DEBUG=(bool, True))
 environ.Env.read_env(
-    env_file=os.SECRET_KEY = env('SECRET_KEY')path.join(BASE_DIR, '.env')
+    env_file=os.path.join(BASE_DIR, '.env')
 )
 
 # Quick-start development settings - unsuitable for production

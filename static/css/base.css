@@ -23,7 +23,7 @@
 .navbar a:hover {
   padding: 3px 6px;
   border-radius: 10px;
-  background-color: PaleTurquoise;
+  background-color: rgb(249,231,159);
 }
 
 .navbar__logo {

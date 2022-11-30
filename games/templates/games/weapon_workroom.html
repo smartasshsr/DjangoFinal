@@ -20,5 +20,27 @@
   <hr>
   
   <!-- [미션] 자유롭게 코드 작성 -->
+  <p>
+    <form action="{% url 'games:weapon_pick' %}" method="post" onsubmit="return checkPick()">
+      {% csrf_token %}
+      {% if character.coin < 500 %}
+        <button type="submit" class="disabled" disabled>무기 뽑기(500코인)</button>
+        <span class="weapon-info">(※ 코인이 부족합니다.)</span>
+        {% else %}
+        <button type="submit">무기 뽑기(500코인)</button>
+        <span class="weapon-info">(※ 무기를 교체하면 무기 레벨이 초기화됩니다.)</span>
+      {% endif %}
+    </form>
+  </p>
   
+  <p>
+    <a href="{% url 'games:adventure_home' %}">돌아가기</a>
+  </p>
+
+  <script>
+    function checkPick() {
+      const result = confirm("정말 뽑으시겠습니까?\n500코인이 소모됩니다.");
+      return result;
+    }
+  </script>
 {% endblock %}

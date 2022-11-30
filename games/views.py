@@ -181,17 +181,32 @@ def adventure_attack(request):
     return render(request, 'games/adventure_attack.html', context)
 
 def adventure_attack_result(request):
-    # 로그인 한 유저의 캐릭터
-    character = get_object_or_404(Character, user=request.user)
+    if request.method == 'POST':
+        # 로그인 한 유저의 캐릭터
+        character = get_object_or_404(Character, user=request.user)
 
-    # 캐릭터와 마주친 랜덤 적
-    enemy_id = request.POST.get('random-enemy')
-    enemy = get_object_or_404(Enemy, id=enemy_id)
-    
-    # [미션] 자유롭게 코드 작성
-    # [미션] 필요 시 context 작성 후 html 페이지에 전달
+        # 캐릭터와 마주친 랜덤 적
+        enemy_id = request.POST.get('random-enemy')
+        enemy = get_object_or_404(Enemy, id=enemy_id)
 
-    return render(request, 'games/adventure_attack_result.html')
+        # [미션] 자유롭게 코드 작성
+        # [미션] 필요 시 context 작성 후 html 페이지에 전달
+        if character.weapon.power*10 >= enemy.hp:
+            result = '승리'
+            reward_coin = randint(enemy.hp*10-5, enemy.hp*10+5)
+            character.coin += reward_coin
+            character.save()
+        else:
+            result = '패배'
+            reward_coin = 0
+        
+        context = {
+            'enemy': enemy,
+            'result': result,
+            'reward_coin' : reward_coin,
+        }
+        return render(request, 'games/adventure_attack_result.html', context)
+    return render(request, 'games/adventure_attack.html', context)
 
 # 무기 공방
 def weapon_workroom(request):
@@ -206,4 +221,42 @@ def weapon_workroom(request):
 
 # [미션] 자유롭게 코드 작성
 # [미션] 무기 뽑기, 교체 등의 기능을 가진 함수 구현
+def weapon_pick(request):
+    if request.method == 'POST':
+        character = get_object_or_404(Character, user=request.user)
+        # 캐릭터가 갖고 있는 코인 저장
+        character_coin = character.coin
+        
+        # 캐릭터가 500코인 이상 갖고 있는 경우
+        if character_coin >= 500:
+            # 500코인 소모
+            character.coin = character_coin - 500
+            character.save()
+
+            random_weapon = Weapon.objects.order_by('?')[0]
+
+            context = {
+                'character': character,
+                'weapon_name': character.weapon.name,
+                'weapon_power': character.weapon.power,
+                'random_weapon': random_weapon,
+            }
+            return render(request, 'games/weapon_change.html', context)
+    return redirect('games:weapon_workroom')
+
+def weapon_change(request):
+    if request.method == 'POST':
+        character = get_object_or_404(Character, user=request.user)
+
+        # 랜덤으로 선택된 무기 id 가져오기
+        weapon_id = request.POST.get('random-weapon')
+        selected_weapon = get_object_or_404(Weapon, id=weapon_id)
+
+        # 캐릭터에 새 무기 장착
+        character.weapon = selected_weapon
+        character.save()
+
+        return redirect('games:weapon_workroom')
+    return redirect('games:weapon_pick')
+
 

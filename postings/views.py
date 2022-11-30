@@ -43,16 +43,27 @@ def posting_list(request):
     # page가 선택되지 않았을 경우에는 '1'로 설정
     if page == None:
         page = '1'
+    # 존재하지 않는 경로로 접근하는 경우 404 페이지로 반환
+    elif page == '0' or not page.isdecimal():
+        return render(request, '404.html')
 
     # 화면에 보여질 페이지 개수 설정
     count = 5
     # 현재 보여지는 페이지를 정수형으로 변환
     recent_page = int(page)
+    # 현재 페이지의 글 개수
+    recent_page_count = 10
     
     # 마지막 페이지 번호 계산
     last_page = postings_num // 10
     if postings_num % 10 != 0:
-        last_page + 1
+        last_page += 1
+    # 현재 페이지의 글 개수 계산
+    if recent_page == last_page:
+        recent_page_count = postings_num % 10
+    # 마지막 페이지보다 큰 숫자로 접근하는 경우 404 페이지로 반환
+    elif recent_page > last_page:
+        return render(request, '404.html')
     
     # '이전' 버튼을 눌렀을 때 이동할 페이지 번호 계산
     previous_page = ((recent_page-1)//count)*count
@@ -82,8 +93,10 @@ def posting_list(request):
 
     # 현재 페이지에서 보여지는 첫 번째 게시글 번호 저장
     page_postings_start_index = postings_num-(recent_page-1)*10
+    print(recent_page_count)
 
     context = {
+        'recent_page_count': recent_page_count*-1,
         'last_page': last_page,
         'previous_page': previous_page,
         'move_previous': move_previous,

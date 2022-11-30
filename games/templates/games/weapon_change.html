@@ -1,3 +1,4 @@
+```html
 {% extends 'base.html' %}
 {% load static %}
 
@@ -7,8 +8,8 @@
   {% endblock %}
 
 {% block body %}
-  <h1>무기 뽑기 결과</h1>
-
+  <h1>무기 공방</h1>
+  
   <hr>
   <p>{{character.nickname}}님의 보유 현황</p>
   <p>
@@ -18,18 +19,8 @@
     </ul>
   </p>
   <hr>
-
-  <p>당신이 뽑은 무기는 <<{{random_weapon.name}}>>입니다.</p>
-  <p>교체하시겠습니까?</p>
-
-  <p>
-    <form action="{% url 'games:weapon_change' %}" method="post">
-      {% csrf_token %}
-      <button type="submit" name="random-weapon" value="{{random_weapon.id}}" onclick="alertSuccess()">교체하기</button>
-      <span class="weapon-info">(※ 무기 레벨이 초기화됩니다.)</span>
-    </form>
-  </p>
-
+  
+  <!-- [미션] 자유롭게 코드 작성 -->
   <p>
     <form action="{% url 'games:weapon_pick' %}" method="post" onsubmit="return checkPick()">
       {% csrf_token %}
@@ -42,19 +33,16 @@
       {% endif %}
     </form>
   </p>
-
+  
   <p>
     <a href="{% url 'games:adventure_home' %}">돌아가기</a>
   </p>
 
   <script>
-    function alertSuccess() {
-      alert('교체되었습니다.');
-    }
-
     function checkPick() {
       const result = confirm("정말 뽑으시겠습니까?\n500코인이 소모됩니다.");
       return result;
     }
   </script>
 {% endblock %}
+```
